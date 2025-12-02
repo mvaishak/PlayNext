@@ -1,0 +1,10 @@
+{
+  "train_matrix_shape": [
+    70912,
+    10978
+  ],
+  "train_nnz": 4103384,
+  "test_size": 990698,
+  "n_test_users": 62936,
+  "train_sparsity": 0.994728924948683
+}

@@ -36,6 +36,14 @@ data/
 *.json.gz
 *.csv.gz
 
+# Large feature and model files (too large for GitHub)
+Archive.zip
+features/*.npz
+features/interactions.csv
+model_outputs/trained_models.pkl
+model_outputs/test_set.csv
+model_outputs/train_matrix.npz
+
 # macOS
 .DS_Store
 .AppleDouble
