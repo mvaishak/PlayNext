@@ -245,9 +245,7 @@ This is an academic project. Suggestions and improvements are welcome!
 
 This project is part of CSE258R Recommender Systems & Web Mining coursework.
 
-## 📧 Contact
 
-For questions or collaboration: [Your Email]
 
 ---
 
