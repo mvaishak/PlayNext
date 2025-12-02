@@ -244,13 +244,8 @@ This is an academic project. Suggestions and improvements are welcome!
 ## 📄 License
 
 This project is part of CSE258R Recommender Systems & Web Mining coursework.
-
-## 📧 Contact
-
-For questions or collaboration: [Your Email]
-
 ---
 
 **Last Updated**: December 2025  
 **Course**: CSE258R Recommender Systems & Web Mining  
-**Institution**: [Your Institution]
+
