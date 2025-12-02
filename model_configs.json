@@ -1,0 +1,20 @@
+{
+  "recommender_bundle": {
+    "type": "NextGameRecommender",
+    "similarity_matrix": "game_similarity_bundle",
+    "alpha": 0.7,
+    "description": "Bundle-based collaborative filtering"
+  },
+  "recommender_copurchase": {
+    "type": "NextGameRecommender",
+    "similarity_matrix": "game_similarity_copurchase",
+    "alpha": 0.7,
+    "description": "Co-purchase based collaborative filtering"
+  },
+  "recommender_combined": {
+    "type": "NextGameRecommender",
+    "similarity_matrix": "game_similarity_combined",
+    "alpha": 0.7,
+    "description": "Hybrid (60% bundle + 40% copurchase)"
+  }
+}

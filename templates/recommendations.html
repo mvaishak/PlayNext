@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Recommendations for {{ user_id }}{% endblock %}
+{% block content %}
+  <header class="section-header">
+    <h2>Recommendations for <strong>{{ user_id }}</strong></h2>
+    <div class="controls">
+      <form method="get" action="{{ url_for('recommendations', user_id=user_id) }}">
+        <label for="n">Top</label>
+        <select name="n" onchange="this.form.submit()">
+          {% for opt in [5,10,20] %}
+            <option value="{{ opt }}" {% if opt==n %}selected{% endif %}>{{ opt }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+  </header>
+
+  <div class="grid">
+    {% if recs %}
+      {% for r in recs %}
+        <article class="card">
+          <img src="{{ r.image }}" alt="{{ r.name }}" class="card-img" />
+          <div class="card-body">
+            <h3 class="card-title">{{ r.rank }}. {{ r.name }}</h3>
+            <p class="meta">{{ r.genre }} {% if r.score %}• score {{ "%.2f"|format(r.score) }}{% endif %}</p>
+            <a class="btn" href="#" onclick="alert('Open game page feature not implemented in demo')">View</a>
+          </div>
+        </article>
+      {% endfor %}
+    {% else %}
+      <p>No recommendations available.</p>
+    {% endif %}
+  </div>
+{% endblock %}

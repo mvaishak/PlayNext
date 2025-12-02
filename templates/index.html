@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PlayNext — Game Recommender</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🎮 PlayNext — Game Recommender</h1>
+
+    <div class="card">
+        <h2>Your Owned Games</h2>
+        <input id="game-search" placeholder="Search your games..." autocomplete="off">
+
+        <div id="autocomplete"></div>
+
+        <div id="selected-games"></div>
+
+        <button id="submit-btn">Get Recommendations</button>
+    </div>
+
+    <div class="results">
+        <h2>Recommended Games</h2>
+
+        <div class="section">
+            <h3>Hybrid (Combined)</h3>
+            <div class="grid" id="combined-results"></div>
+        </div>
+
+        <div class="section">
+            <h3>Bundle-Based</h3>
+            <div class="grid" id="bundle-results"></div>
+        </div>
+
+        <div class="section">
+            <h3>Co-Purchase Based</h3>
+            <div class="grid" id="copurchase-results"></div>
+        </div>
+    </div>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
