@@ -34,6 +34,11 @@ st.markdown("""
         --steam-green: #5cb85c;
     }
     
+    /* Hide default Streamlit navigation */
+    [data-testid="stSidebarNav"] {
+        display: none;
+    }
+    
     /* Main background */
     .stApp {
         background-color: #1b2838;

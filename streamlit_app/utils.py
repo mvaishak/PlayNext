@@ -47,6 +47,16 @@ def load_game_metadata():
         return None
 
 @st.cache_data
+def load_game_names():
+    """Load game ID to name mapping"""
+    try:
+        with open("game_names.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        # Return empty dict if not found
+        return {}
+
+@st.cache_data
 def load_mappings():
     """Load ID mappings"""
     try:
@@ -128,38 +138,45 @@ def extract_app_id(game_id):
 
 def format_game_card(game_info, rank=None, show_image=True):
     """
-    Create a styled game card with Steam theme
+    Create a styled game card with Steam theme using Streamlit components
     
     Args:
         game_info: Dict with item_id, score/confidence, and optionally item_idx
         rank: Recommendation rank (1, 2, 3, ...)
         show_image: Whether to show the Steam game image
     """
+    import streamlit as st
+    
     item_id = game_info.get('item_id', 'Unknown')
     score = game_info.get('score', game_info.get('confidence', 0))
     
-    # Create the card
-    card_html = f"""
-    <div class="game-card">
-    """
+    # Load game names and get the actual name
+    game_names = load_game_names()
+    game_name = game_names.get(str(item_id), f"Unknown Game")
+    
+    # Format score
+    score_pct = f"{score * 100:.1f}%" if score < 10 else f"{score:.2f}"
+    
+    # Create rank badge
+    rank_badge = f"<span style='background: #66c0f4; color: #1b2838; padding: 2px 8px; border-radius: 3px; font-weight: bold; margin-right: 8px;'>#{rank}</span>" if rank else ""
     
     if show_image:
         img_url = get_steam_image_url(item_id)
-        card_html += f"""
-        <img src="{img_url}" style="width: 100%; border-radius: 4px; margin-bottom: 10px;" 
-             onerror="this.src='https://via.placeholder.com/460x215/1b2838/66c0f4?text=Game+Image'">
-        """
+        # Use st.image with fallback
+        try:
+            st.image(img_url, width='stretch')
+        except:
+            st.image("https://via.placeholder.com/460x215/1b2838/66c0f4?text=Game+Image", width='stretch')
+        
+        st.markdown("&nbsp;", unsafe_allow_html=True)  # Small spacing
     
-    rank_badge = f"<span class='badge badge-blue'>#{rank}</span> " if rank else ""
-    score_pct = f"{score * 100:.1f}%" if score < 10 else f"{score:.2f}"
-    
-    card_html += f"""
-        <div class="game-title">{rank_badge}{item_id}</div>
-        <div class="game-score">Score: {score_pct}</div>
-    </div>
-    """
-    
-    return card_html
+    # Display title and score with better formatting
+    st.markdown(f"<div style='background: #16202d; padding: 12px; border-radius: 4px; margin-bottom: 10px;'>"
+                f"<div style='margin-bottom: 8px;'>{rank_badge}</div>"
+                f"<div style='color: #66c0f4; font-weight: bold; font-size: 1.1em; margin-bottom: 5px;'>{game_name}</div>"
+                f"<div style='color: #8f98a0; font-size: 0.85em; margin-bottom: 3px;'>App ID: {item_id}</div>"
+                f"<div style='color: #8f98a0; font-size: 0.85em;'>Score: {score_pct}</div>"
+                f"</div>", unsafe_allow_html=True)
 
 def format_bundle_info(bundle_info):
     """Format bundle ownership information"""

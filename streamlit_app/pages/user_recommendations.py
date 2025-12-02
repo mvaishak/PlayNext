@@ -145,10 +145,7 @@ def show():
                 if idx < len(next_game_recs):
                     rec = next_game_recs[idx]
                     with col:
-                        st.markdown(
-                            format_game_card(rec, rank=idx+1, show_image=show_images),
-                            unsafe_allow_html=True
-                        )
+                        format_game_card(rec, rank=idx+1, show_image=show_images)
     else:
         st.info("No next-game recommendations available for this user")
     
@@ -184,10 +181,7 @@ def show():
                 if idx < len(bundle_recs):
                     rec = bundle_recs[idx]
                     with col:
-                        st.markdown(
-                            format_game_card(rec, rank=idx+1, show_image=show_images),
-                            unsafe_allow_html=True
-                        )
+                        format_game_card(rec, rank=idx+1, show_image=show_images)
     else:
         st.info("No partial bundles found for this user. They may own complete bundles or no bundles at all.")
     
